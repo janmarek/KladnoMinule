@@ -1,0 +1,6 @@
+data
+libs/Doctrine
+libs/Nette
+nbproject
+.idea
+.htaccess

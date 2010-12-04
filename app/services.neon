@@ -1,0 +1,5 @@
+Nette\Application\IPresenterLoader:
+  class: Neuron\Application\PresenterLoader
+  callMethods:
+    setNamespaces:
+      - [KladnoMinule\Presenter, Neuron\Presenter]

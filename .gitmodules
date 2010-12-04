@@ -1,0 +1,3 @@
+[submodule "libs/Neuron"]
+	path = libs/Neuron
+	url = git@github.com:janmarek/Neuron.git
