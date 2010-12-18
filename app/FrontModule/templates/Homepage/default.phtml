@@ -1,0 +1,45 @@
+{block content}
+
+<div class="box">
+{control clip 'homepage.cs'}
+</div>
+
+<div class="span-9">
+
+
+<div class="box graybox">
+	<h3>Nejnovější články</h3>
+
+	<ul>
+		<li n:foreach="$newestArticles as $article">
+			<h4><a n:href="Page: $article->id">{$article->name}</a></h4>
+			<p>{$article->description}</p>
+			<p class="detail">
+				Datum {$article->created|date:'j.n.Y'}, {if $article->author}autor: {$article->author->name}{/if},
+				kategorie: <a n:href="Category: $article->category->id">{$article->category->name}</a>
+			</p>
+		</li>
+	</ul>
+</div>
+
+</div>
+
+
+<div class="span-9 last">
+
+<div class="box">
+	{control clip 'supportus.cs'}
+</div>
+
+<div class="box">
+	<h3>Facebook</h3>
+	<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FKladno-minule%2F218245624350&amp;width=310&amp;colorscheme=light&amp;connections=10&amp;stream=true&amp;header=false&amp;height=555" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:310px; height:555px; background: white;" allowTransparency="true"></iframe>
+</div>
+</div>
+
+<div class="span-18 last">
+	<div class="box graybox">
+		<h3>Poslední komentáře</h3>
+
+	</div>
+</div>
