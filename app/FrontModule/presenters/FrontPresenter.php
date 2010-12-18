@@ -15,4 +15,11 @@ abstract class FrontPresenter extends \Neuron\Presenter\FrontModule\HomepagePres
 		$tagCloud->destination = ':Front:Tag:default';
 		$tagCloud->setData($this->getService('TagService')->getUsedTags());
 	}
+
+
+
+	protected function createComponentLoginForm()
+	{
+		return new \KladnoMinule\Form\LoginForm;
+	}
 }

@@ -1,0 +1,24 @@
+{form $form}
+
+<fieldset>
+	<div class="error" n:foreach="$formErrors as $error">{$error}</div>
+
+	<p>
+		{label mail}E-mail{/label}<br>
+		{input mail}
+	</p>
+	<p>
+		{label password}Heslo{/label}<br>
+		{input password}
+	</p>
+
+	<p>{input s value => "Přihlásit se"}</p>
+
+	<ul>
+		<li><a n:href="User:lostPassword">Zapomněli jste heslo?</a></li>
+		<li><a n:href="User:register">Registrujte se</a></li>
+	</ul>
+
+</fieldset>
+
+{/form}
