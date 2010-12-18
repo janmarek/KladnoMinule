@@ -7,19 +7,10 @@
 <div class="span-9">
 
 
-<div class="box graybox">
+<div class="box graybox newest-articles">
 	<h3>Nejnovější články</h3>
 
-	<ul>
-		<li n:foreach="$newestArticles as $article">
-			<h4><a n:href="Page: $article->id">{$article->name}</a></h4>
-			<p>{$article->description}</p>
-			<p class="detail">
-				Datum {$article->created|date:'j.n.Y'}, {if $article->author}autor: {$article->author->name}{/if},
-				kategorie: <a n:href="Category: $article->category->id">{$article->category->name}</a>
-			</p>
-		</li>
-	</ul>
+	{control newestArticles $newestArticles}
 </div>
 
 </div>

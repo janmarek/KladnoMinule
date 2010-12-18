@@ -17,6 +17,7 @@ class Finder extends \Neuron\Model\Page\Finder
 	}
 
 
+
 	public function orderByDateDesc()
 	{
 		$this->qb->orderBy("p.created", "desc");
@@ -24,11 +25,21 @@ class Finder extends \Neuron\Model\Page\Finder
 	}
 
 
+
 	public function whereCategory($category)
 	{
 		$this->qb->andWhere("c.id = :catid")->setParameter("catid", $category->getId());
 		return $this;
 	}
+
+
+
+	public function whereAuthor($author)
+	{
+		$this->qb->andWhere('p.author = :authorid')->setParameter('authorid', $author->getId());
+		return $this;
+	}
+
 
 
 	public function whereTag($tag)

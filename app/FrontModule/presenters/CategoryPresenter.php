@@ -14,6 +14,14 @@ class CategoryPresenter extends FrontPresenter
 	{
 		$category = $this->getService('CategoryService')->find($id);
 		$this->template->title = $category->getName();
-		$this->template->articles = $this->getService('PageService')->getFinder()->whereAllowed()->whereCategory($category)->getResult();
+		$this->template->articles = $this->getService('PageService')->getPublishedArticles()->whereCategory($category)->getResult();
+	}
+
+
+
+	protected function createComponentArticles($name)
+	{
+		$control = new \KladnoMinule\Control\ArticleList($this, $name);
+		$control->setShowCategory(false);
 	}
 }

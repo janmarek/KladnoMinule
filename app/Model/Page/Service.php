@@ -36,6 +36,14 @@ class Service extends \Neuron\Model\Page\Service
 	}
 
 
+
+	public function getPublishedArticles()
+	{
+		return $this->getFinder()->whereAllowed()->orderByDateDesc();
+	}
+
+
+
 	public function setData($entity, $data)
 	{
 		if (isset($data['language'])) {

@@ -3,15 +3,23 @@
 namespace KladnoMinule\Presenter\FrontModule;
 
 /**
- * HomepagePresenter
+ * Homepage presenter
  *
  * @author Jan Marek
  */
 class HomepagePresenter extends FrontPresenter
 {
-
 	public function renderDefault()
 	{
-		$this->template->newestArticles = $this->getService('PageService')->getFinder()->whereAllowed()->orderByDateDesc()->getLimitedResult(7);
+		$articles = $this->getService('PageService')->getPublishedArticles()->getLimitedResult(7);
+		$this->template->newestArticles = $articles;
 	}
+
+
+
+	protected function createComponentNewestArticles($name)
+	{
+		new \KladnoMinule\Control\ArticleList($this, $name);
+	}
+
 }

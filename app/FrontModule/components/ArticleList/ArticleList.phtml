@@ -1,0 +1,11 @@
+<ul>
+	<li n:foreach="$articles as $article">
+		<h4><a href="{plink Page: $article->id}">{$article->name}</a></h4>
+		<p>{$article->description}</p>
+		<p class="detail">
+			Datum: {$article->created|date:'j.n.Y'}{if $showAuthor && $article->author},
+			autor: <a href="{plink User:profile $article->author->id}">{$article->author->name}</a>{/if}{if $showCategory && $article->category},
+			kategorie: <a href="{plink Category: $article->category->id}">{$article->category->name}</a>{/if}
+		</p>
+	</li>
+</ul>

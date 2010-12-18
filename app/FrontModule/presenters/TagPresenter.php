@@ -14,7 +14,13 @@ class TagPresenter extends FrontPresenter
 	{
 		$tag = $this->getService('TagService')->find($id);
 		$this->template->title = $tag->getName();
-		$this->template->articles = $this->getService('PageService')->getFinder()->whereAllowed()->whereTag($tag)->getResult();
+		$this->template->articles = $this->getService('PageService')->getPublishedArticles()->whereTag($tag)->getResult();
+	}
 
+
+
+	protected function createComponentArticles($name)
+	{
+		new \KladnoMinule\Control\ArticleList($this, $name);
 	}
 }
