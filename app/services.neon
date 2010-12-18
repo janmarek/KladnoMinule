@@ -3,3 +3,41 @@ Nette\Application\IPresenterLoader:
   callMethods:
     setNamespaces:
       - [KladnoMinule\Presenter, Neuron\Presenter]
+
+Nette\Security\IAuthenticator:
+  class: KladnoMinule\Model\Authenticator
+  arguments: [%UserService]
+
+CategoryService:
+  class: KladnoMinule\Model\Category\Service
+  arguments: [%Doctrine\ORM\EntityManager]
+
+UserService:
+  class: KladnoMinule\Model\User\Service
+  arguments: [%Doctrine\ORM\EntityManager]
+
+LanguageService:
+  class: KladnoMinule\Model\Language\Service
+  arguments: [%Doctrine\ORM\EntityManager]
+
+TagService:
+  class: KladnoMinule\Model\Tag\Service
+  arguments: [%Doctrine\ORM\EntityManager]
+
+PageService:
+  class: KladnoMinule\Model\Page\Service
+  arguments: [%Doctrine\ORM\EntityManager, %LanguageService, %CategoryService, %UserService, %TagService]
+
+# webloader
+
+#AdminCss:
+#  class: Neuron\WebLoader\DefaultAdminCss
+
+# AdminJs:
+#  class: Neuron\WebLoader\DefaultAdminJs
+
+FrontCss:
+  class: KladnoMinule\WebLoader\FrontCss
+
+# FrontJs:
+#  class: Neuron\WebLoader\DefaultFrontJs
