@@ -12,6 +12,22 @@ class Finder extends \Neuron\Model\Page\Finder
 	public function __construct($service)
 	{
 		parent::__construct($service);
+		$this->qb->join("p.author", "a");
+		$this->qb->join("p.category", "c");
+	}
+
+
+	public function orderByDateDesc()
+	{
+		$this->qb->orderBy("p.created", "desc");
+		return $this;
+	}
+
+
+	public function whereCategory($category)
+	{
+		$this->qb->andWhere("c.id = :catid")->setParameter("catid", $category->getId());
+		return $this;
 	}
 
 }

@@ -9,9 +9,23 @@ namespace KladnoMinule\Model\Page;
  */
 class Service extends \Neuron\Model\Page\Service
 {
-	public function __construct($em)
+	private $languageService;
+
+	private $categoryService;
+
+	private $userService;
+
+	private $tagService;
+
+
+
+	public function __construct($em, $languageService, $categoryService, $userService, $tagService)
 	{
 		parent::__construct($em, __NAMESPACE__ . "\Page");
+		$this->languageService = $languageService;
+		$this->categoryService = $categoryService;
+		$this->userService = $userService;
+		$this->tagService = $tagService;
 	}
 
 
@@ -19,6 +33,31 @@ class Service extends \Neuron\Model\Page\Service
 	public function getFinder()
 	{
 		return new Finder($this);
+	}
+
+
+	public function setData($entity, $data)
+	{
+		if (isset($data['language'])) {
+			$data['language'] = $this->languageService->find($data['language']);
+		}
+
+		if (isset($data['category'])) {
+			$data['category'] = $this->categoryService->find($data['category']);
+		}
+
+		if (isset($data['author'])) {
+			$data['author'] = $this->userService->find($data['author']);
+		}
+
+		if (isset($data['tags'])) {
+			$tagService = $this->tagService;
+			$data['tags'] = array_map(function ($id) use ($tagService) {
+				return $tagService->find($id);
+			}, $data['tags']);
+		}
+
+		parent::setData($entity, $data);
 	}
 
 }

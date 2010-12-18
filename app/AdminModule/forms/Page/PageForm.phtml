@@ -1,0 +1,52 @@
+{form $form}
+
+<fieldset>
+	<div class="error" n:foreach="$formErrors as $error">{$error}</div>
+
+	<p>
+		{label name}name{/label}<br>
+		{input name}
+	</p>
+	<p>
+		{label url}url{/label}<br>
+		{input url}
+	</p>
+	<p>
+		{label description}description{/label}<br>
+		{input description}
+	</p>
+	<p>
+		{label text}text{/label}<br>
+		{input text}
+	</p>
+	<p>
+		{input allowed} {label allowed}allowed{/label}
+	</p>
+	<p>
+		{label created}created{/label}<br>
+		{input created}
+	</p>
+	<p>
+		{input commentsAllowed} {label commentsAllowed}commentsAllowed{/label}
+	</p>
+	<p>
+		{label language}language{/label}<br>
+		{input language}
+	</p>
+	<p>
+		{label author}author{/label}<br>
+		{input author}
+	</p>
+	<p>
+		{label category}category{/label}<br>
+		{input category}
+	</p>
+	<p>
+		{label tags}tags{/label}<br>
+		{input tags}
+	</p>
+
+	<p>{input s value => "Save"}</p>
+</fieldset>
+
+{/form}

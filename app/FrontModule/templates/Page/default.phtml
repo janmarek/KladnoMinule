@@ -1,0 +1,9 @@
+{block content}
+
+<div class="box">
+<h1>{$title}</h1>
+
+<p class="detail">{$page->description}</p>
+
+{cache $page->cacheKey, tags => $page->cacheKey}{!$page->text|texy}{/cache}
+</div>
