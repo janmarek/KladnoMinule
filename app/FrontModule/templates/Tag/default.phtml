@@ -1,0 +1,11 @@
+{block content}
+
+<div class="box">
+	<ul>
+		<li n:foreach="$articles as $article">
+			<h4><a n:href="Page: $article->id">{$article->name}</a></h4>
+			<p>{$article->description}</p>
+			<p class="detail">Datum {$article->created|date:'j.n.Y'}, {if $article->author}autor: {$article->author->name}{/if}</p>
+		</li>
+	</ul>
+</div>

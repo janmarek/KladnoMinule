@@ -1,0 +1,7 @@
+<div class="hTagCloud">
+	<ul class="{$sortClass}">
+		{foreach $tags as $tag}
+			<li class="{$tag->class}"><a href="{$tag->url}">{$tag->name}</a></li>
+		{/foreach}
+	</ul>
+</div>

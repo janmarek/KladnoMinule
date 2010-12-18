@@ -30,4 +30,11 @@ class Finder extends \Neuron\Model\Page\Finder
 		return $this;
 	}
 
+
+	public function whereTag($tag)
+	{
+		$this->qb->andWhere(':tagid member of p.tags')->setParameter('tagid', $tag->getId());
+		return $this;
+	}
+
 }

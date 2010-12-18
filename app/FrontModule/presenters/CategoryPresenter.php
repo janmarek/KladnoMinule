@@ -7,7 +7,7 @@ namespace KladnoMinule\Presenter\FrontModule;
  *
  * @author Jan Marek
  */
-class CategoryPresenter extends \Neuron\Presenter\FrontModule\HomepagePresenter
+class CategoryPresenter extends FrontPresenter
 {
 
 	public function renderDefault($id)

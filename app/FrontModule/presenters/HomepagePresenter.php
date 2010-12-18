@@ -7,7 +7,7 @@ namespace KladnoMinule\Presenter\FrontModule;
  *
  * @author Jan Marek
  */
-class HomepagePresenter extends \Neuron\Presenter\FrontModule\HomepagePresenter
+class HomepagePresenter extends FrontPresenter
 {
 
 	public function renderDefault()
