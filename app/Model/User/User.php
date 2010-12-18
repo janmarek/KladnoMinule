@@ -51,8 +51,15 @@ class User extends \Neuron\Model\BaseEntity
 	public function __construct(array $values = array())
 	{
 		$this->created = new DateTime;
-		$this->hash = md5(uniqid("", true));
+		$this->setNewHash();
 		parent::__construct($values);
+	}
+
+
+
+	public function setNewHash()
+	{
+		$this->hash = md5(uniqid("", true));
 	}
 
 
@@ -119,6 +126,7 @@ class User extends \Neuron\Model\BaseEntity
 			$salt = md5(uniqid("", true));
 			$hash = $hashFunction($salt . $password);
 			$this->password = $salt . '$' . $hash . '$' . $hashFunction;
+			$this->hash = null;
 		}
 	}
 

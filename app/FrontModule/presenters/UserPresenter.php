@@ -40,4 +40,22 @@ class UserPresenter extends FrontPresenter
 
 
 
+	protected function createComponentLostPasswordForm($name)
+	{
+		new \KladnoMinule\Form\LostPasswordForm($this, $name);
+	}
+
+
+
+	protected function createComponentNewPasswordForm($name)
+	{
+		$form = new \KladnoMinule\Form\NewPasswordForm($this, $name);
+		$form->setDefaults(array(
+			'mail' => $this->getParam('mail'),
+			'hash' => $this->getParam('hash'),
+		));
+	}
+
+
+
 }
