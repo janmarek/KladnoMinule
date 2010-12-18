@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<title>{if isset($title)}{$title} - {/if}Kladno minulé</title>
+
+	<meta name="description" content="{$description}" n:ifset="$description">
+	<meta name="keywords" content="{$keywords}" n:ifset="$keywords">
+	<meta name="robots" content="{$robots}" n:ifset="$robots">
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+
+	{control css}
+	{widget js}
+</head>
+<body>
+	<div class="container">
+		<div id="header" class="span-24">
+			<a n:href="Homepage:" id="logo"><span>Kladno minulé</span></a>
+			<p id="slogan">čtení nejen o uhlí a oceli</p>
+		</div>
+
+		<div id="menu" class="span-24">
+			{control menu}
+		</div>
+
+		<div id="content" class="span-24 clearfix">
+		<div class="span-18" id="text">
+				{snippet flashes}
+				<div n:class="$flash->type === 'error' ? 'error' : 'success'" n:foreach="$flashes as $flash">{$flash->message}</div>
+				{/snippet}
+
+				{include #content}
+		</div>
+
+		<div class="span-6 last" id="sidebar">
+			<div class="box">
+				<h3>Témata</h3>
+			</div>
+
+			<div class="box">
+				{if $user->isLoggedIn()}
+					<h3>Přihlášen {$user->identity->name} {$user->identity->surname}</h3>
+					<ul>
+						<li n:if="$user->isInRole('admin')"><a href="{plink :Admin:Pages:}">Administrace</a></li>
+						<li><a href="{link logout!}">Odhlásit se</a></li>
+					</ul>
+				{else}
+					<h3>Přihlásit se</h3>
+					{control loginForm}
+				{/if}
+			</div>
+
+			<div class="box partners">
+				<h3>Partneři</h3>
+				{control clip 'partners'}
+			</div>
+
+
+
+
+		</div>
+		</div>
+
+		<div id="footer" class="span-24">
+
+		<p>© 2007 – 2010 Kladno minulé, webmaster <a href="http://www.janmarek.net/">Jan Marek</a>, koordinátoři projektu <a href="mailto:romanhajek&#64;centrum.cz">Roman Hájek</a> a <a href="mailto:zuzvlc&#64;volny.cz">Zuzana Vlčková</a></p>
+		<p>
+			Obsah webu je licencován pod <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported License</a>.
+		</p>
+		</div>
+	</div>
+</body>
+</html>
