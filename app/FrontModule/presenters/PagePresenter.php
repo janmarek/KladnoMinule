@@ -15,6 +15,16 @@ class PagePresenter extends FrontPresenter
 		$this->template->page = $page;
 		$this->template->title = $page->name;
 		$this->template->description = $page->description;
+
+		if ($page->getCommentsAllowed()) {
+			$this['comments']->setCommentGroup($page->getComments());
+		}
+	}
+
+
+	protected function createComponentComments($name)
+	{
+		new \Neuron\Control\Comments($this, $name);
 	}
 
 }
