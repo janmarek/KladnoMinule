@@ -66,6 +66,7 @@ class TagPresenter extends \Neuron\Presenter\AdminModule\AdminPresenter
 		$grid->setModel($this->service->getFinder()->getGriditoModel());
 
 		$grid->addColumn("name", "Název")->setSortable(true);
+		$grid->addColumn("itemCount", "Počet článků")->setSortable(true);
 
 		$presenter = $this;
 
