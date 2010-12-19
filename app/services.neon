@@ -16,17 +16,13 @@ UserService:
   class: KladnoMinule\Model\User\Service
   arguments: [%Doctrine\ORM\EntityManager]
 
-LanguageService:
-  class: KladnoMinule\Model\Language\Service
-  arguments: [%Doctrine\ORM\EntityManager]
-
 TagService:
   class: KladnoMinule\Model\Tag\Service
   arguments: [%Doctrine\ORM\EntityManager]
 
 PageService:
   class: KladnoMinule\Model\Page\Service
-  arguments: [%Doctrine\ORM\EntityManager, %LanguageService, %CategoryService, %UserService, %TagService]
+  arguments: [%Doctrine\ORM\EntityManager, %CategoryService, %UserService, %TagService]
 
 # webloader
 

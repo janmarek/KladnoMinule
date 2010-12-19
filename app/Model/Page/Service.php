@@ -9,8 +9,6 @@ namespace KladnoMinule\Model\Page;
  */
 class Service extends \Neuron\Model\Page\Service
 {
-	private $languageService;
-
 	private $categoryService;
 
 	private $userService;
@@ -19,10 +17,9 @@ class Service extends \Neuron\Model\Page\Service
 
 
 
-	public function __construct($em, $languageService, $categoryService, $userService, $tagService)
+	public function __construct($em, $categoryService, $userService, $tagService)
 	{
 		parent::__construct($em, __NAMESPACE__ . "\Page");
-		$this->languageService = $languageService;
 		$this->categoryService = $categoryService;
 		$this->userService = $userService;
 		$this->tagService = $tagService;
@@ -46,10 +43,6 @@ class Service extends \Neuron\Model\Page\Service
 
 	public function setData($entity, $data)
 	{
-		if (isset($data['language'])) {
-			$data['language'] = $this->languageService->find($data['language']);
-		}
-
 		if (isset($data['category'])) {
 			$data['category'] = $this->categoryService->find($data['category']);
 		}

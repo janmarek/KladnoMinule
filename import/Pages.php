@@ -42,8 +42,6 @@ class Pages implements IImport
 	{
 		echo "Started importing pages.\n";
 
-		$czech = \Nette\Environment::getService('LanguageService')->findOneByUrl('cs');
-
 		$pages = $dibi->select("t.*, a.mail")->from("text t")
 			->where("t.parent in %in and t.lng in %in", $this->fromParents, $this->fromLanguages)
 			->and("t.secret = 0")
@@ -74,7 +72,6 @@ class Pages implements IImport
 				'name' => $page->name,
 				'url' => $url,
 				'created' => $page->datetime_create,
-				'language' => $czech,
 				'author' => $author,
 				'allowed' => $page->allowed,
 				'description' => $page->description,

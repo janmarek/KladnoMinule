@@ -21,7 +21,6 @@ class PageForm extends \Neuron\Form\EntityForm
 		$this->addCheckbox("allowed");
 		$this->addDatePicker("created");
 		$this->addCheckbox("commentsAllowed");
-		$this->addSelect("language", null, $this->getService('LanguageService')->getDictionary());
 		$this->addSelect("author", null, $this->getService('UserService')->getDictionary())->skipFirst('Bez autora');
 		$this->addSelect("category", null, $this->getService('CategoryService')->getDictionary());
 		$this->addMultiSelect("tags", null, $this->getService('TagService')->getDictionary(), 10);

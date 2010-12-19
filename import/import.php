@@ -22,7 +22,6 @@ require __DIR__ . '/Categories.php';
 require __DIR__ . '/Pages.php';
 
 $imports[] = new Users;
-$imports[] = new Languages;
 $imports[] = $categoriesImport = new Categories;
 $pagesImport = new Pages($categoriesImport);
 $pagesImport->fromParents = array(2, 3, 4);

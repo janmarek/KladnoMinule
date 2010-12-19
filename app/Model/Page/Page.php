@@ -16,9 +16,6 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Page extends \Neuron\Model\Page\Page
 {
-	/** @ManyToOne(targetEntity="KladnoMinule\Model\Language\Language") */
-	private $language;
-
 	/** @Column(type="datetime") */
 	private $created;
 
@@ -112,20 +109,6 @@ class Page extends \Neuron\Model\Page\Page
 	public function getCreated()
 	{
 		return $this->created;
-	}
-
-
-
-	public function setLanguage($language)
-	{
-		$this->language = $language;
-	}
-
-
-
-	public function getLanguage()
-	{
-		return $this->language;
 	}
 
 
