@@ -28,7 +28,7 @@ class Authenticator implements \Nette\Security\IAuthenticator
 	{
 		list($mail, $password) = $credentials;
 
-		$user = $this->userService->findOneByMail($mail);
+		$user = $this->userService->getFinder()->whereMail($mail)->whereActive()->getSingleResult();
 
 		if ($user) {
 			if ($user->verifyPassword($password)) {

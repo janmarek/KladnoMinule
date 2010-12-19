@@ -30,12 +30,12 @@ class User extends \Neuron\Model\BaseEntity
 	 * @Column
 	 * @validation:NotBlank
 	 */
-	private $role;
+	private $role = 'user';
 
 	/** @Column(type="boolean") */
 	private $active = false;
 
-	/** @Column(nullable=true) */
+	/** @Column(nullable=true, unique=true) */
 	private $hash;
 
 	/**
@@ -51,8 +51,8 @@ class User extends \Neuron\Model\BaseEntity
 	public function __construct(array $values = array())
 	{
 		$this->created = new DateTime;
-		$this->setNewHash();
 		parent::__construct($values);
+		$this->setNewHash();
 	}
 
 

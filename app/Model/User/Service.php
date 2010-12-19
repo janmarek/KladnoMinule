@@ -45,7 +45,7 @@ class Service extends \Neuron\Model\Service
 	{
 		$user->setNewHash();
 
-		$template = $this->createTemplate(__DIR__ . '/lostPassword.phtml');
+		$template = $this->createTemplate(__DIR__ . '/mail/lostPassword.phtml');
 		$presenter = \Nette\Environment::getApplication()->getPresenter();
 		$template->link = $presenter->link('//:Front:User:confirmLostPassword', array(
 			'id' => $user->getId(),
@@ -59,6 +59,46 @@ class Service extends \Neuron\Model\Service
 		$mail->send();
 
 		$this->getEntityManager()->flush();
+	}
+
+
+
+	public function register($data)
+	{
+		$em = $this->getEntityManager();
+
+		$user = new User($data);
+		$em->persist($user);
+
+		$template = $this->createTemplate(__DIR__ . '/mail/register.phtml');
+		$presenter = \Nette\Environment::getApplication()->getPresenter();
+		$template->link = $presenter->link('//:Front:User:finishRegistration', array(
+			'hash' => $user->getHash(),
+		));
+
+		$mail = new Mail;
+		$mail->setHtmlBody($template);
+		$mail->setFrom('no-reply@kladnominule.cz', 'Kladno minulé');
+		$mail->addTo($user->getMail(), $user->getName());
+		$mail->send();
+
+		$em->flush();
+	}
+
+
+
+	public function activateUser($hash)
+	{
+		$user = $this->getFinder()->whereHash($hash)->getSingleResult();
+
+		if (!$user) {
+			throw new UserNotFoundException("User with hash $hash cannot be found.");
+		}
+
+		$user->setActive(true);
+		$this->getEntityManager()->flush();
+
+		return $user;
 	}
 
 

@@ -1,0 +1,10 @@
+{extends APP_DIR . '/templates/mail.phtml'}
+
+{block subject}Registrace{/block}
+
+{block body}
+	<p>
+		Dobrý den,<br>
+		pro dokončení registrace <a href="{$link}">aktivujte svůj účet</a>.
+	</p>
+{/block}

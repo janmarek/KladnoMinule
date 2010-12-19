@@ -32,10 +32,31 @@ class UserPresenter extends FrontPresenter
 
 
 
+	public function actionFinishRegistration($hash)
+	{
+		try {
+			$user = $this->service->activateUser($hash);
+			$this->flashMessage('Uživatel je aktivován a registrace byla úspěšně dokončena.');
+			$this->redirect("Homepage:");
+
+		} catch (\KladnoMinule\Model\User\UserNotFoundException $e) {
+			$this->flashMessage('Uživatel nebyl nalezen. Možná již byl aktivován.', 'error');
+		}
+	}
+
+
+
 	protected function createComponentArticles($name)
 	{
 		$control = new \KladnoMinule\Control\ArticleList($this, $name);
 		$control->setShowAuthor(false);
+	}
+
+
+
+	protected function createComponentRegisterForm($name)
+	{
+		new \KladnoMinule\Form\RegisterForm($this, $name);
 	}
 
 

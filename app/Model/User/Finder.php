@@ -32,6 +32,7 @@ class Finder extends \Neuron\Model\EntityFinder
 	public function whereActive()
 	{
 		$this->qb->andWhere("u.active = true");
+		return $this;
 	}
 
 }
