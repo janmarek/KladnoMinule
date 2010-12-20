@@ -47,6 +47,8 @@
 				{if $user->isLoggedIn()}
 					<h3>Přihlášen {$user->identity->name} {$user->identity->surname}</h3>
 					<ul>
+						<li><a href="{plink User:profile $user->id}">Můj profil</a></li>
+						<li><a href="{plink User:lostPassword mail => $user->identity->mail}">Změna hesla</a></li>
 						<li n:if="$user->isInRole('admin')"><a href="{plink :Admin:Pages:}">Administrace</a></li>
 						<li><a href="{link logout!}">Odhlásit se</a></li>
 					</ul>

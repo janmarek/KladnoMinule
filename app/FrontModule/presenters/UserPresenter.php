@@ -22,12 +22,13 @@ class UserPresenter extends FrontPresenter
 
 
 
-	public function renderProfile($id)
+	public function actionProfile($id)
 	{
 		$user = $this->service->find($id);
 		$this->template->person = $user;
 		$this->template->title = 'Uživatel ' . $user->getName();
 		$this->template->articles = $this->getService('PageService')->getPublishedArticles()->whereAuthor($user)->getResult();
+		$this['sendMailForm']->setTo($user->getMail());
 	}
 
 
@@ -61,9 +62,21 @@ class UserPresenter extends FrontPresenter
 
 
 
+	protected function createComponentSendMailForm($name)
+	{
+		$form = new \KladnoMinule\Form\SendMailForm($this, $name);
+		$form->setFrom($this->getUser()->getIdentity()->mail, $this->getUser()->getIdentity()->name);
+		$form->setSuccessFlashMessage("E-mail byl úspěšně odeslán.");
+		$form->setRedirect("this");
+	}
+
+
+
 	protected function createComponentLostPasswordForm($name)
 	{
-		new \KladnoMinule\Form\LostPasswordForm($this, $name);
+		$form = new \KladnoMinule\Form\LostPasswordForm($this, $name);
+		$form['mail']->setDefaultValue($this->getParam('mail', ''));
+
 	}
 
 

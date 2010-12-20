@@ -12,3 +12,9 @@
 {control articles $articles}
 {/if}
 </div>
+
+
+<div class="box graybox" n:if="$user->isLoggedIn()">
+	<h2>Poslat e-mail uživateli</h2>
+	{control sendMailForm}
+</div>
