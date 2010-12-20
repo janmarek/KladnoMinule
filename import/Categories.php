@@ -6,12 +6,8 @@ use KladnoMinule\Model\Category\Category;
 
 require_once __DIR__ . '/IImport.php';
 
-class Categories implements IImport
+class Categories extends AbstractImport
 {
-	private $map;
-
-
-
 	public function clear(\Doctrine\ORM\EntityManager $em)
 	{
 		$em->createQuery('delete KladnoMinule\Model\Category\Category c')->execute();
@@ -20,32 +16,30 @@ class Categories implements IImport
 
 
 
-	public function getImportedMap()
-	{
-		return $this->map;
-	}
-
-
-
 	public function init(\Doctrine\ORM\EntityManager $em)
 	{
 		echo "Started creating categories.\n";
 
-		$this->map["2"] = $category2 = new Category(array(
+		$category = new Category(array(
 			'name' => 'Fotografie',
 		));
+		$this->persist($em, $category);
 
-		$this->map["3"] = $category3 = new Category(array(
+		$category2 = new Category(array(
 			'name' => 'Pohlednice',
 		));
+		$this->persist($em, $category2);
 
-		$this->map["4"] = $category4 = new Category(array(
+		$category3 = new Category(array(
 			'name' => 'Příběhy',
 		));
+		$this->persist($em, $category3);
 
-		$em->persist($category2);
-		$em->persist($category3);
-		$em->persist($category4);
+		$category4 = new Category(array(
+			'name' => 'Blog',
+		));
+		$this->persist($em, $category4);
+
 		$em->flush();
 
 		echo "Categories created.\n";

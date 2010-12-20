@@ -2,9 +2,11 @@
 
 namespace KladnoMinule\Import;
 
+use KladnoMinule\Model\User\User;
+
 require_once __DIR__ . '/IImport.php';
 
-class Users implements IImport
+class Users extends AbstractImport
 {
 	public function clear(\Doctrine\ORM\EntityManager $em)
 	{
@@ -26,38 +28,34 @@ class Users implements IImport
 		$users = $res->fetchAll();
 
 		foreach ($users as $user) {
-			$userEntity = new \KladnoMinule\Model\User\User(array(
+			$role = $user->admin == 1 ? 'admin' : (!empty($user->mail) ? 'user' : 'author');
+
+			$userEntity = new User(array(
 				'name' => $user->name,
 				'mail' => $user->mail ?: null,
-				'role' => $user->admin == 1 ? 'admin' : (!empty($user->mail) ? 'user' : 'author'),
+				'role' => $role,
 				'active' => $user->active == 1,
 			));
 
-			// set created
-			$createdReflection = $userEntity->getReflection()->getProperty('created');
-			$createdReflection->setAccessible(true);
+			// created
 			if ($user->datetime_create) {
 				$created = $user->datetime_create;
 			} else {
 				$created = new \DateTime;
 				$created->setDate(2008, 1, 1);
 			}
-			$createdReflection->setValue($userEntity, $created);
+			$this->setPrivateValue($userEntity, 'created', $created);
 
 			// set password
-			$passReflection = $userEntity->getReflection()->getProperty('password');
-			$passReflection->setAccessible(true);
 			$pass = $user->password ? '$' . $user->password . '$md5' : null;
-			$passReflection->setValue($userEntity, $pass);
+			$this->setPrivateValue($userEntity, 'password', $pass);
 
 			// set hash
-			if (!$userEntity->isActive()) {
-				$hashReflection = $userEntity->getReflection()->getProperty('hash');
-				$hashReflection->setAccessible(true);
-				$hashReflection->setValue($userEntity, $user->hash);
-			}
+			$this->setPrivateValue($userEntity, 'hash', $userEntity->isActive() ? null : $user->hash);
 
-			$em->persist($userEntity);
+			//var_dump($userEntity);exit;
+
+			$this->persist($em, $userEntity);
 
 			//echo "User " . $userEntity->getName() . " imported.\n";
 		}

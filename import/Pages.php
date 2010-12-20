@@ -6,19 +6,18 @@ use KladnoMinule\Model\Page\Page;
 
 require_once __DIR__ . '/IImport.php';
 
-class Pages implements IImport
+class Pages extends AbstractImport
 {
-	public $fromParents = array();
-
-	public $fromLanguages = array();
-
 	private $categoriesImport;
 
+	private $usersImport;
 
 
-	public function __construct($categoriesImport)
+
+	public function __construct($categoriesImport, $usersImport)
 	{
 		$this->categoriesImport = $categoriesImport;
+		$this->usersImport = $usersImport;
 	}
 
 
@@ -42,24 +41,50 @@ class Pages implements IImport
 	{
 		echo "Started importing pages.\n";
 
-		$pages = $dibi->select("t.*, a.mail")->from("text t")
-			->where("t.parent in %in and t.lng in %in", $this->fromParents, $this->fromLanguages)
-			->and("t.secret = 0")
-			->leftJoin("author a")->on("(a.id = t.author)")
-			->fetchAll();
+		// select data
+
+		$res = $dibi->select("*")->from("text")
+			->where("parent in %in", array(2, 3, 4, 37, 78))
+			->and("secret = 0")
+			->execute();
+
+		$res->setType('id', \dibi::INTEGER);
+		$res->setType('author', \dibi::INTEGER);
+		$res->setType('datetime_create', \dibi::DATETIME);
+
+		$pages = $res->fetchAll();
+
+		// import
 
 		$urls = array();
+
+		// imported categories
 		$categoriesMap = $this->categoriesImport->getImportedMap();
+		$parentToCategoryMapping = array(
+			2 => 1, 3 => 2, 4 => 3, 37 => 4, 78 => 3,
+		);
+
+		// imported authors
+		$authorMap = $this->usersImport->getImportedMap();
 
 		foreach ($pages as $page) {
-			if ($page->author === 2 || !$page->author) {
+			// author is Roman Hájek and it is not blog
+			// || author is Jan Marek
+			// || author is not set
+			if (($page->author == 2 && $page->parent != 37) || $page->author == 1 || !$page->author) {
 				$author = null;
 			} else {
-				$author = \Nette\Environment::getService('UserService')->findOneByMail($page->mail);
+				$author = $authorMap[$page->author];
 			}
 
-			$category = $categoriesMap[$page->parent];
+			// select category
+			if (isset($parentToCategoryMapping[$page->parent])) {
+				$category = $categoriesMap[$parentToCategoryMapping[$page->parent]];
+			} else {
+				$category = null;
+			}
 
+			// create unique url
 			if (in_array($page->url, $urls)) {
 				$url = $page->url . "-" . $category->getUrL();
 			} else {
@@ -79,13 +104,13 @@ class Pages implements IImport
 				'category' => $category,
 			));
 
-			$em->persist($pageEntity);
+			$this->persist($em, $pageEntity);
 
 			echo "Page " . $pageEntity->getName() . " imported.\n";
 		}
 
 		$em->flush();
-		echo "Pages imported.";
+		echo "Pages imported.\n";
 	}
 
 }
