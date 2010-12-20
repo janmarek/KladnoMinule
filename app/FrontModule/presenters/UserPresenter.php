@@ -27,7 +27,11 @@ class UserPresenter extends FrontPresenter
 		$user = $this->service->find($id);
 		$this->template->person = $user;
 		$this->template->title = 'Uživatel ' . $user->getName();
-		$this->template->articles = $this->getService('PageService')->getPublishedArticles()->whereAuthor($user)->getResult();
+		$articles = $this->getService('PageService')->getPublishedArticles()->whereAuthor($user);
+		$paginator = $this["articles"]["paginator"]->getPaginator();
+		$paginator->setItemCount($articles->count());
+		$paginator->setItemsPerPage(6);
+		$this->template->articles = $articles->getPaginatedResult($paginator);
 		$this['sendMailForm']->setTo($user->getMail());
 	}
 

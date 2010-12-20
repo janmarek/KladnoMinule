@@ -13,8 +13,11 @@ class CategoryPresenter extends FrontPresenter
 	public function renderDefault($id)
 	{
 		$category = $this->getService('CategoryService')->find($id);
+		$articles = $this->getService('PageService')->getPublishedArticles()->whereCategory($category);
 		$this->template->title = $category->getName();
-		$this->template->articles = $this->getService('PageService')->getPublishedArticles()->whereCategory($category)->getResult();
+		$paginator = $this["articles"]["paginator"]->getPaginator();
+		$paginator->setItemCount($articles->count());
+		$this->template->articles = $articles->getPaginatedResult($paginator);
 	}
 
 

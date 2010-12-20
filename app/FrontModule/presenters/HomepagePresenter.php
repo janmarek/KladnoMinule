@@ -19,7 +19,8 @@ class HomepagePresenter extends FrontPresenter
 
 	protected function createComponentNewestArticles($name)
 	{
-		new \KladnoMinule\Control\ArticleList($this, $name);
+		$list = new \KladnoMinule\Control\ArticleList($this, $name);
+		$list->disablePaginator();
 	}
 
 }

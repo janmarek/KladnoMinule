@@ -14,7 +14,10 @@ class TagPresenter extends FrontPresenter
 	{
 		$tag = $this->getService('TagService')->find($id);
 		$this->template->title = $tag->getName();
-		$this->template->articles = $this->getService('PageService')->getPublishedArticles()->whereTag($tag)->getResult();
+		$articles = $this->getService('PageService')->getPublishedArticles()->whereTag($tag);
+		$paginator = $this["articles"]["paginator"]->getPaginator();
+		$paginator->setItemCount($articles->count());
+		$this->template->articles = $articles->getPaginatedResult($paginator);
 	}
 
 
