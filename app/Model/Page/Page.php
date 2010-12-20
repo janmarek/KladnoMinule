@@ -41,8 +41,8 @@ class Page extends \Neuron\Model\Page\Page
 
 	public function __construct(array $values = array())
 	{
-		parent::__construct($values);
 		$this->created = new DateTime;
+		parent::__construct($values);
 		$this->photogallery = new \Neuron\Model\Photo\Gallery;
 		$this->comments = new \Neuron\Model\Comment\CommentGroup;
 		$this->tags = new ArrayCollection;

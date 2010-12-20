@@ -7,3 +7,11 @@
 
 {cache $page->cacheKey, tags => $page->cacheKey}{!$page->text|texy}{/cache}
 </div>
+
+{if $page->comments && $page->commentsAllowed}
+<div class="box graybox comments">
+<h2>Komentáře</h2>
+
+{control comments}
+</div>
+{/if}
