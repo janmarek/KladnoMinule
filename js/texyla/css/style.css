@@ -4,7 +4,7 @@ div.texyla div.textarea-container * {margin: auto !important;}
 
 /* lišta */
 div.texyla ul.toolbar {margin:0; padding:0 0 0 5px; height:30px;}
-div.texyla ul.toolbar li {margin:0; padding:0; list-style:none; float:left; width:30px; height:30px;}
+div.texyla ul.toolbar li {margin:0; padding:0; list-style: none none !important; float:left; width:30px; height:30px;}
 div.texyla ul.toolbar li span {display:block; padding:7px; cursor:pointer;}
 div.texyla ul.toolbar li img {display:block;}
 div.texyla ul.toolbar li.separator {width:5px; background:url("../img/separator.gif") no-repeat 50% 50%;}

@@ -12,11 +12,14 @@ class FrontCSS extends \Neuron\Webloader\DefaultFrontCss
 	protected function init()
 	{
 		parent::init();
-		$this->addFile(WWW_DIR . "/css/layout.less");
-		$this->addFile(WWW_DIR . "/css/menu.less");
-		$this->addFile(WWW_DIR . "/css/content.less");
-		$this->addFile(WWW_DIR . "/css/text.less");
-		$this->addFile(WWW_DIR . "/css/sidebar.less");
+		$this->addFiles(array(
+			WWW_DIR . "/css/layout.less",
+			WWW_DIR . "/css/menu.less",
+			WWW_DIR . "/css/content.less",
+			WWW_DIR . "/css/text.less",
+			WWW_DIR . "/css/sidebar.less",
+			WWW_DIR . "/js/texyla/css/style.css",
+		));
 	}
 
 }

@@ -35,5 +35,5 @@ PageService:
 FrontCss:
   class: KladnoMinule\WebLoader\FrontCss
 
-# FrontJs:
-#  class: Neuron\WebLoader\DefaultFrontJs
+FrontJs:
+  class: KladnoMinule\WebLoader\FrontJs
