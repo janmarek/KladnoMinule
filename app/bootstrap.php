@@ -32,6 +32,14 @@ if (!Environment::isConsole()) {
 
 	$router = $application->getRouter();
 
+	$router[] = new Neuron\Application\SeoRouter("Front:Page", "default", "", function () {
+		return Environment::getService("PageService")->getUrlDictionary();
+	});
+
+	$router[] = new Neuron\Application\SeoRouter("Front:Tag", "default", "tag/", function () {
+		return Environment::getService("TagService")->getUrlDictionary();
+	});
+
 	$router[] = new Nette\Application\Route("<presenter>/<action>/<id>", array(
 		"presenter" => "Front:Homepage",
 		"action" => "default",

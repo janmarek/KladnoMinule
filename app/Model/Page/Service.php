@@ -61,4 +61,24 @@ class Service extends \Neuron\Model\Page\Service
 		parent::setData($entity, $data);
 	}
 
+
+
+	/**
+	 * @return array
+	 */
+	public function getUrlDictionary()
+	{
+		$qb = $this->getPublishedArticles()->getQueryBuilder();
+		$qb->select('partial p.{id, url}, partial c.{id, url}');
+		$res = $qb->getQuery()->getScalarResult();
+
+		$arr = array();
+
+		foreach ($res as $item) {
+			$arr[$item['p_id']] = ($item['c_url'] ? $item['c_url'] . '/' : '') . $item['p_url'];
+		}
+
+		return $arr;
+	}
+
 }

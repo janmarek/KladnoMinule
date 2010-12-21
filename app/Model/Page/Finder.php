@@ -48,4 +48,11 @@ class Finder extends \Neuron\Model\Page\Finder
 		return $this;
 	}
 
+
+
+	public function getQueryBuilder()
+	{
+		return $this->qb;
+	}
+
 }
