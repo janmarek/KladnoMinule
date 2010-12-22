@@ -53,14 +53,12 @@ class Users extends AbstractImport
 			// set hash
 			$this->setPrivateValue($userEntity, 'hash', $userEntity->isActive() ? null : $user->hash);
 
-			//var_dump($userEntity);exit;
+			$this->persist($em, $userEntity, $user->id);
 
-			$this->persist($em, $userEntity);
-
-			//echo "User " . $userEntity->getName() . " imported.\n";
+			echo ".";
 		}
 
 		$em->flush();
-		echo "Users imported.\n";
+		echo "\nUsers imported.\n";
 	}
 }

@@ -30,11 +30,15 @@ $pagesImport = new Pages($categoriesImport, $usersImport);
 require __DIR__ . '/Comments.php';
 $commentsImport = new Comments($usersImport, $pagesImport);
 
+require __DIR__ . '/Photos.php';
+$photosImport = new Photos($pagesImport);
+
 $imports = array(
 	$usersImport,
 	$categoriesImport,
 	$pagesImport,
 	$commentsImport,
+	$photosImport,
 );
 
 // clear db

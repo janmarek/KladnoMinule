@@ -31,9 +31,9 @@ abstract class AbstractImport implements IImport
 
 
 
-	protected function addToMap($entity)
+	protected function addToMap($entity, $id)
 	{
-		$this->map[(int) ($entity->getId())] = $entity;
+		$this->map[(int) $id] = $entity;
 	}
 
 
@@ -45,10 +45,10 @@ abstract class AbstractImport implements IImport
 
 
 
-	protected function persist($em, $entity)
+	protected function persist($em, $entity, $id)
 	{
 		$em->persist($entity);
-		$this->addToMap($entity);
+		$this->addToMap($entity, $id);
 	}
 
 }

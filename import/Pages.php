@@ -104,13 +104,13 @@ class Pages extends AbstractImport
 				'category' => $category,
 			));
 
-			$this->persist($em, $pageEntity);
+			$this->persist($em, $pageEntity, $page->id);
 
-			echo "Page " . $pageEntity->getName() . " imported.\n";
+			echo ".";
 		}
 
 		$em->flush();
-		echo "Pages imported.\n";
+		echo "\nPages imported.\n";
 	}
 
 }

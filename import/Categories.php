@@ -23,22 +23,22 @@ class Categories extends AbstractImport
 		$category = new Category(array(
 			'name' => 'Fotografie',
 		));
-		$this->persist($em, $category);
+		$this->persist($em, $category, 1);
 
 		$category2 = new Category(array(
 			'name' => 'Pohlednice',
 		));
-		$this->persist($em, $category2);
+		$this->persist($em, $category2, 2);
 
 		$category3 = new Category(array(
 			'name' => 'Příběhy',
 		));
-		$this->persist($em, $category3);
+		$this->persist($em, $category3, 3);
 
 		$category4 = new Category(array(
 			'name' => 'Blog',
 		));
-		$this->persist($em, $category4);
+		$this->persist($em, $category4, 4);
 
 		$em->flush();
 

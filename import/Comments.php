@@ -66,10 +66,11 @@ class Comments extends AbstractImport
 			$this->setPrivateValue($commentEntity, 'created', $comment->date);
 
 			$pagesMap[$comment->parent]->getComments()->addComment($commentEntity);
+			echo ".";
 		}
 
 		$em->flush();
-		echo "Comments imported.";
+		echo "\nComments imported.\n";
 	}
 
 }
