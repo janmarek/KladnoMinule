@@ -1,0 +1,10 @@
+{block content}
+
+<h1>{$title}</h1>
+
+<p><a n:href="addGallery!">Přidat fotogalerii</a></p>
+
+{foreach $galleries as $gallery}
+<h2>Fotogalerie {$iterator->getCounter()}</h2>
+{control gallery $gallery}
+{/foreach}

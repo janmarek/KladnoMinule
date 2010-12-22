@@ -28,8 +28,8 @@ class Page extends \Neuron\Model\Page\Page
 	/** @Column(type="boolean") */
 	private $commentsAllowed = true;
 
-	/** @OneToOne(targetEntity="Neuron\Model\Photo\Gallery", cascade={"all"}) */
-	private $photogallery;
+	/** @ManyToMany(targetEntity="Neuron\Model\Photo\Gallery", cascade={"all"}) */
+	private $photogalleries;
 
 	/** @ManyToOne(targetEntity="KladnoMinule\Model\Category\Category") */
 	private $category;
@@ -43,7 +43,7 @@ class Page extends \Neuron\Model\Page\Page
 	{
 		$this->created = new DateTime;
 		parent::__construct($values);
-		$this->photogallery = new \Neuron\Model\Photo\Gallery;
+		$this->photogalleries = new ArrayCollection;
 		$this->comments = new \Neuron\Model\Comment\CommentGroup;
 		$this->tags = new ArrayCollection;
 	}
@@ -113,9 +113,16 @@ class Page extends \Neuron\Model\Page\Page
 
 
 
-	public function getPhotogallery()
+	public function getPhotogalleries()
 	{
-		return $this->photogallery;
+		return $this->photogalleries;
+	}
+
+
+
+	public function addPhotogallery()
+	{
+		$this->photogalleries->add(new \Neuron\Model\Photo\Gallery);
 	}
 
 

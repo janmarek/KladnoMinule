@@ -41,6 +41,14 @@ class Service extends \Neuron\Model\Page\Service
 
 
 
+	public function addGallery($page)
+	{
+		$page->addPhotogallery();
+		$this->getEntityManager()->flush();
+	}
+
+
+
 	public function setData($entity, $data)
 	{
 		if (isset($data['category'])) {

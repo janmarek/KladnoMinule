@@ -46,6 +46,30 @@ class PagesPresenter extends \Neuron\Presenter\AdminModule\AdminPresenter
 
 
 
+	public function renderPhoto($id)
+	{
+		$page = $this->service->find($id);
+		$this->template->title = 'Fotogalerie ke článku ' . $page->getName();
+		$this->template->galleries = $page->getPhotogalleries();
+	}
+
+
+	public function handleAddGallery($id)
+	{
+		$page = $this->service->find($id);
+		$this->service->addGallery($page);
+		$this->flashMessage("Fotogalerie byla přidána.");
+		$this->redirect("this");
+	}
+
+
+	protected function createComponentGallery($name)
+	{
+		new \KladnoMinule\Control\PhotoGalleryContainer($this, $name);
+	}
+
+
+
 	protected function createComponentForm($name)
 	{
 		$form = new PageForm($this, $name);
@@ -72,6 +96,13 @@ class PagesPresenter extends \Neuron\Presenter\AdminModule\AdminPresenter
 
 		$presenter = $this;
 		$service = $this->service;
+
+		$grid->addButton('galleries', 'Fotogalerie', array(
+			'icon' => 'ui-icon-image',
+			'link' =>  function ($page) use ($presenter) {
+				return $presenter->link("photo", array("id" => $page->id));
+			},
+		));
 
 		$grid->addButton("edit", "Upravit", array(
 			"icon" => "ui-icon-pencil",
