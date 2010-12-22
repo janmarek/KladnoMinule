@@ -27,7 +27,7 @@ Neuron\Form\FormMacros::register();
 if (!Environment::isConsole()) {
 	// error presenter
 	$application = Environment::getApplication();
-	$application->errorPresenter = 'Error';
+	$application->errorPresenter = 'Front:Error';
 	//$application->catchExceptions = TRUE;
 
 	$router = $application->getRouter();

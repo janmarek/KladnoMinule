@@ -23,3 +23,8 @@ $("textarea.texyla").livequery(function () {
 		padding: 0
 	});
 });
+
+
+$(function () {
+	$(".noscript").hide();
+});
