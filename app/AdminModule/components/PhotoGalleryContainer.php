@@ -12,9 +12,9 @@ class PhotoGalleryContainer extends \Neuron\BaseControl
 	protected function createComponent($id)
 	{
 		$service = $this->getService('PhotogalleryService');
-		$gallery = new \Neuron\PhotogalleryAdmin;
+		$gallery = new \Neuron\PhotogalleryAdmin($this, $id);
 		$gallery->setGallery($service->find($id));
-		return $gallery;
+		$gallery['grid']->setAjaxClass("nic");
 	}
 
 	public function render($gallery)
