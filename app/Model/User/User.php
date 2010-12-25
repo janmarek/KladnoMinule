@@ -87,7 +87,7 @@ class User extends \Neuron\Model\BaseEntity
 
 	public function setMail($mail)
 	{
-		$this->mail = $mail;
+		$this->mail = $mail ?: null;
 	}
 
 

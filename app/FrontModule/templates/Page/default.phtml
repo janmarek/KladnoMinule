@@ -5,7 +5,38 @@
 
 <p class="detail">{$page->description}</p>
 
+{foreach $page->photogalleries as $gallery}
+{control gallery $gallery}
+{/foreach}
+
 {cache $page->cacheKey, tags => $page->cacheKey}{!$page->text|texy}{/cache}
+
+
+{if $page->lat && $page->lng}
+<h2>Mapa</h2>
+<div id="pagemap" style="height:300px;"></div>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+var point = new google.maps.LatLng({$page->lat}, {$page->lng});
+var map = new google.maps.Map(document.getElementById("pagemap"), {
+	zoom: 13,
+	center: point,
+	mapTypeId: google.maps.MapTypeId.ROADMAP
+});
+
+marker = new google.maps.Marker({
+	map: map,
+	position: point
+});
+</script>
+{/if}
+
+<p class="detail">Datum: {$page->created|date:'j.n.Y'}{if $page->author},
+autor: <a n:href="User:profile $page->author->id">{$page->author->name}</a>{/if}{if $page->category},
+kategorie: <a n:href="Category: $page->category->id">{$page->category->name}</a>{/if}{if count($page->tags) > 0},
+témata: {foreach $page->tags as $tag}{if !$iterator->first}, {/if}<a n:href="Tag: $tag->id">{$tag->name}</a>{/foreach}{/if}</p>
+
+<p><fb:like show_faces="false" font="trebuchet ms" href="{link //this}"></fb:like></p>
 </div>
 
 {if $page->comments && $page->commentsAllowed}

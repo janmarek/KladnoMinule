@@ -1,0 +1,47 @@
+{block content}
+
+<div class="box">
+<h1>{$title} - {$current}/{$total}</h1>
+
+<p class="photo-detail">
+<a href="{if $photo->nextPhoto}{link photos id => $page->id, gallery => $gallery->id, photo => $photo->nextPhoto->id}{else}{link default $page->id}{/if}">
+	{$photo|imagepath|thumbnail:670:500|imagehtml}
+</a>
+</p>
+
+<p n:if="$photo->description" class="photo-description">{$photo->description}</p>
+
+<p style="margin-top:2em"><fb:like show_faces="false" font="trebuchet ms" href="{link //this}"></fb:like></p>
+
+</div>
+
+<div class="box graybox comments">
+<h2>Komentáře</h2>
+
+{control comments}
+</div>
+
+{/block}
+
+{block sidebar}
+<div class="box graybox">
+	<h3>Fotogalerie</h3>
+
+	<p class="gallery-prev-next clearfix">
+		<a class="prev" n:href="photos id => $page->id, gallery => $gallery->id, photo => $photo->prevPhoto->id" n:if="$photo->prevPhoto">
+			{$photo->prevPhoto|imagepath|thumbnail:80:80:'crop'|imagehtml}
+			Předchozí
+		</a>
+		<a class="next" n:href="photos id => $page->id, gallery => $gallery->id, photo => $photo->nextPhoto->id" n:if="$photo->nextPhoto">
+			{$photo->nextPhoto|imagepath|thumbnail:80:80:'crop'|imagehtml}
+			Další
+		</a>
+	</p>
+
+	<ul>
+		<li><a n:href="default $page->id">Zpět na článek</a></li>
+	</ul>
+</div>
+
+{include #parent}
+{/block}

@@ -38,6 +38,10 @@ class TagCloud extends \Neuron\BaseControl
 	{
 		$this->data = $data;
 
+		if (empty($data)) {
+			return;
+		}
+
 		$occurs = array_map(function ($tag) {
 			return $tag->getItemCount();
 		}, $data);

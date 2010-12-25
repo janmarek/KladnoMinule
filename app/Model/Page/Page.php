@@ -19,6 +19,12 @@ class Page extends \Neuron\Model\Page\Page
 	/** @Column(type="datetime") */
 	private $created;
 
+	/** @Column(type="float", nullable=true) */
+	private $lat;
+
+	/** @Column(type="float", nullable=true) */
+	private $lng;
+
 	/** @ManyToOne(targetEntity="KladnoMinule\Model\User\User") */
 	private $author;
 
@@ -155,5 +161,32 @@ class Page extends \Neuron\Model\Page\Page
 		return $this->tags;
 	}
 
+
+
+	public function setLat($lat)
+	{
+		$this->lat = $lat;
+	}
+
+
+
+	public function getLat()
+	{
+		return $this->lat;
+	}
+
+
+
+	public function setLng($lng)
+	{
+		$this->lng = $lng ?: null;
+	}
+
+
+
+	public function getLng()
+	{
+		return $this->lng ?: null;
+	}
 
 }

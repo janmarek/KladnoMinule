@@ -1,0 +1,13 @@
+<h3 n:if="$gallery->name">{$gallery->name}</h3>
+
+<ul class="gallery clearfix">
+	<li n:foreach="$photos as $photo">
+		<a class="prev" href="{plink Page:photos id => $page->id, gallery => $gallery->id, photo => $photo->id}">
+			{$photo|imagepath|thumbnail:100:100:'crop'|imagehtml}
+		</a>
+	</li>
+</ul>
+
+{if $showPaginator}
+{control paginator}
+{/if}

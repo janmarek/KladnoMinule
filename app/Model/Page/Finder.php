@@ -12,8 +12,8 @@ class Finder extends \Neuron\Model\Page\Finder
 	public function __construct($service)
 	{
 		parent::__construct($service);
-		$this->qb->join("p.author", "a");
-		$this->qb->join("p.category", "c");
+		$this->qb->leftJoin("p.author", "a");
+		$this->qb->leftJoin("p.category", "c");
 	}
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
@@ -8,6 +8,9 @@
 	<meta name="description" content="{$description}" n:ifset="$description">
 	<meta name="keywords" content="{$keywords}" n:ifset="$keywords">
 	<meta name="robots" content="{$robots}" n:ifset="$robots">
+	<meta property="fb:admins" content="1305711413">
+	<meta property="fb:page_id" content="218245624350">
+	<meta property="fb:app_id" content="122372034466649">
 
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
 	{control rss}
@@ -40,6 +43,7 @@
 		</div>
 
 		<div class="span-6 last" id="sidebar">
+			{block sidebar}
 			<div class="box">
 				<h3>Témata</h3>
 				{control tagCloud}
@@ -64,9 +68,7 @@
 				<h3>Partneři</h3>
 				{control clip 'partners'}
 			</div>
-
-
-
+			{/block}
 
 		</div>
 		</div>
@@ -83,5 +85,15 @@
 			</p>
 		</div>
 	</div>
+
+	<script src="http://connect.facebook.net/cs_CZ/all.js#xfbml=1"></script>
+	<script>
+		FB.init({
+			appId: '122372034466649',
+			status: true,
+			cookie: true,
+			xfbml: true
+		});
+	</script>
 </body>
 </html>

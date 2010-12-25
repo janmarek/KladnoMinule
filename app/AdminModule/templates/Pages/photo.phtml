@@ -4,7 +4,8 @@
 
 <p><a n:href="addGallery!">Přidat fotogalerii</a></p>
 
+<ul>
 {foreach $galleries as $gallery}
-<h2>Fotogalerie {$iterator->getCounter()}</h2>
-{control gallery $gallery}
+	<li><a href="{plink Photo: $gallery->id}">{if $gallery->name}{$gallery->name}{else}Fotogalerie {$iterator->getCounter()}{/if}</a></li>
 {/foreach}
+</ul>
