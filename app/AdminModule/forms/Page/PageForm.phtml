@@ -4,49 +4,98 @@
 	<div class="error" n:foreach="$formErrors as $error">{$error}</div>
 
 	<p>
-		{label name}name{/label}<br>
+		{label name}Jméno{/label}<br>
 		{input name}
 	</p>
 	<p>
-		{label url}url{/label}<br>
+		{label url}URL{/label}<br>
 		{input url}
 	</p>
 	<p>
-		{label description}description{/label}<br>
+		{label description}Popis{/label}<br>
 		{input description}
 	</p>
 	<p>
-		{label text}text{/label}<br>
+		{label text}Text{/label}<br>
 		{input text}
 	</p>
 	<p>
-		{input allowed} {label allowed}allowed{/label}
+		{input allowed} {label allowed}Zobrazit článek na webu{/label}
 	</p>
 	<p>
-		{label created}created{/label}<br>
+		{label created}Vytvořeno{/label}<br>
 		{input created}
 	</p>
 	<p>
-		{input commentsAllowed} {label commentsAllowed}commentsAllowed{/label}
+		{input commentsAllowed} {label commentsAllowed}Povolit komentáře{/label}
 	</p>
 	<p>
-		{label language}language{/label}<br>
-		{input language}
-	</p>
-	<p>
-		{label author}author{/label}<br>
+		{label author}Autor{/label}<br>
 		{input author}
 	</p>
 	<p>
-		{label category}category{/label}<br>
+		{label category}Kategorie{/label}<br>
 		{input category}
 	</p>
 	<p>
-		{label tags}tags{/label}<br>
+		{label tags}Tagy{/label}<br>
 		{input tags}
 	</p>
 
-	<p>{input s value => "Save"}</p>
+	<p><label>Mapa</label></p>
+	<div id="map" style="width:600px; height: 300px;"></div>
+	<p><a href="#" id="cancelMap">Zrušit umístění</a></p>
+
+	<p>{input s value => "Uložit"}</p>
 </fieldset>
 
 {/form}
+
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+var map, marker;
+
+var latInput = $("#" + {$form->elementPrototype->id}).find("input[name=lat]");
+var lngInput = $("#" + {$form->elementPrototype->id}).find("input[name=lng]");
+var lat = latInput.val();
+var lng = lngInput.val();
+
+var point = null, center;
+
+if (lat && lng) {
+	point = new google.maps.LatLng(lat, lng);
+	center = point;
+} else {
+	center = new google.maps.LatLng(50.142861, 14.098549);
+}
+
+map = new google.maps.Map(document.getElementById("map"), {
+	zoom: 13,
+	center: center,
+	mapTypeId: google.maps.MapTypeId.ROADMAP
+});
+
+marker = new google.maps.Marker({
+
+});
+
+if (point) {
+	marker.setMap(map);
+	marker.setPosition(point);
+}
+
+google.maps.event.addListener(map, "click", function (e) {
+	marker.setMap(map);
+	marker.setPosition(e.latLng);
+	latInput.val(e.latLng.lat());
+	lngInput.val(e.latLng.lng());
+});
+
+$("#cancelMap").click(function (e) {
+	e.preventDefault();
+	marker.setMap(null);
+	latInput.val("");
+	lngInput.val("");
+});
+</script>

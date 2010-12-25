@@ -24,5 +24,7 @@ class PageForm extends \Neuron\Form\EntityForm
 		$this->addSelect("author", null, $this->getService('UserService')->getDictionary())->skipFirst('Bez autora');
 		$this->addSelect("category", null, $this->getService('CategoryService')->getDictionary());
 		$this->addMultiSelect("tags", null, $this->getService('TagService')->getDictionary(), 10);
+		$this->addHidden("lat");
+		$this->addHidden("lng");
 	}
 }
