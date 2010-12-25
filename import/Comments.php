@@ -52,6 +52,7 @@ class Comments extends AbstractImport
 
 		foreach ($comments as $comment) {
 			if (empty($pagesMap[$comment->parent])) {
+				echo "\n  warning - comment import failed (" . \Nette\String::truncate($comment->text_texy, 100) . ")\n";
 				continue;
 			}
 

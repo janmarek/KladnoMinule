@@ -53,6 +53,11 @@ class Users extends AbstractImport
 			// set hash
 			$this->setPrivateValue($userEntity, 'hash', $userEntity->isActive() ? null : $user->hash);
 
+//			$v = \Nette\Environment::getService("validator")->validate($userEntity);
+//			if (count($v)) {
+//				var_dump($userEntity);
+//			}
+
 			$this->persist($em, $userEntity, $user->id);
 
 			echo ".";

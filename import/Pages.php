@@ -44,7 +44,7 @@ class Pages extends AbstractImport
 		// select data
 
 		$res = $dibi->select("*")->from("text")
-			->where("parent in %in", array(2, 3, 4, 37, 78))
+			->where("(parent in %in or id in %in)", array(2, 3, 4, 37, 78), array(6))
 			->and("secret = 0")
 			->execute();
 

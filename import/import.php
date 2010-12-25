@@ -14,7 +14,7 @@ $dibi = new \DibiConnection(array(
 	'host' => '127.0.0.1',
 	'username' => 'root',
 	'password' => '',
-	'database' => 'kladnominule',
+	'database' => 'kladnoweb',
 ));
 
 // define imports

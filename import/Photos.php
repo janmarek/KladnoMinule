@@ -60,7 +60,8 @@ class Photos extends AbstractImport
 				foreach ($galleries as $photo) {
 					$file = $originalRoot . "/" . $photo->filename . ".jpg";
 
-					if (empty($pagesMap[$photo->parent]) || !file_exists($file)) {
+					if (empty($pagesMap[$photo->parent])) {
+						echo "\n  warning - $photo->filename import failed.\n";
 						break;
 						// todo warning
 					}
