@@ -32,7 +32,7 @@ class Service extends \Neuron\Model\Service
 
 	public function getUrlDictionary()
 	{
-		return $this->getFinder()->orderByName()->fetchPairs('id', 'url');
+		return $this->getFinder()->fetchPairs('id', 'url');
 	}
 
 

@@ -2,6 +2,8 @@
 
 namespace KladnoMinule\Presenter\FrontModule;
 
+use Nette\Image;
+
 /**
  * Page presenter
  *
@@ -11,7 +13,7 @@ class PagePresenter extends FrontPresenter
 {
 	public function actionDefault($id)
 	{
-		$page = $this->getService("PageService")->getPublishedArticles()->whereId($id)->getSingleResult();
+		$page = $this->getService("PageService")->getPublishedArticleById($id);
 		$this->template->page = $page;
 		$this->template->title = $page->name;
 		$this->template->description = $page->description;
@@ -27,7 +29,7 @@ class PagePresenter extends FrontPresenter
 
 	public function actionPhotos($id, $gallery, $photo)
 	{
-		$page = $this->getService("PageService")->getPublishedArticles()->whereId($id)->getSingleResult();
+		$page = $this->getService("PageService")->getPublishedArticleById($id);
 		$galleryEntity = $this->getService("PhotogalleryService")->find($gallery);
 		$photoEntity = $this->getService("PhotoService")->find($photo);
 		$this->template->page = $page;

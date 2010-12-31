@@ -28,4 +28,11 @@ class Service extends \Neuron\Model\Service
 		return $this->getFinder()->fetchPairs('id', 'name');
 	}
 
+
+
+	public function getUrlDictionary()
+	{
+		return $this->getFinder()->fetchPairs('id', 'url');
+	}
+
 }

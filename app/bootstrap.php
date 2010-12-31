@@ -32,6 +32,10 @@ if (!Environment::isConsole()) {
 
 	$router = $application->getRouter();
 
+	$router[] = new Neuron\Application\SeoRouter("Front:Category", "default", "", function () {
+		return Environment::getService("CategoryService")->getUrlDictionary();
+	});
+
 	$router[] = new Neuron\Application\SeoRouter("Front:Page", "default", "", function () {
 		return Environment::getService("PageService")->getUrlDictionary();
 	});

@@ -1,3 +1,6 @@
+TemplateHelperLoader:
+  factory: KladnoMinule\ServiceFactories::createHelperLoader
+
 Nette\Application\IPresenterLoader:
   class: Neuron\Application\PresenterLoader
   callMethods:

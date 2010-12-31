@@ -1,5 +1,6 @@
-<ul>
-	<li n:foreach="$articles as $article">
+<ul class="article-list clearfix">
+	<li n:foreach="$articles as $article" n:class="$iterator->odd ? 'odd' : 'even', count($article->photogalleries) === 0 ? 'without-thumbnail'">
+		{$article|pagethumbnail}
 		<h4><a href="{plink Page: $article->id}">{$article->name}</a></h4>
 		<p>{$article->description}</p>
 		<p class="detail">
