@@ -17,13 +17,13 @@ class Tag extends \Neuron\Model\BaseEntity
 {
 	/**
 	 * @Column
-	 * @validation:NotBlank
+	 * @validation:NotBlank(message="Jméno není vyplněné.")
 	 */
 	private $name;
 
 	/**
 	 * @Column
-	 * @validation:NotBlank
+	 * @validation:NotBlank(message="URL není vyplněná.")
 	 */
 	private $url;
 

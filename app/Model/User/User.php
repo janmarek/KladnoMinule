@@ -16,19 +16,20 @@ class User extends \Neuron\Model\BaseEntity
 {
 	/**
 	 * @Column
-	 * @validation:NotBlank
+	 * @validation:NotBlank(message="Jméno není vyplněné.")
 	 */
 	private $name;
 
 	/**
 	 * @Column(unique=true, nullable=true)
-	 * @validation:Email
+	 * @validation:Email(message="E-mail není vyplněn.")
+	 * @validation:Unique(message="E-mail není unikátní.")
 	 */
 	private $mail;
 
 	/**
 	 * @Column
-	 * @validation:NotBlank
+	 * @validation:NotBlank(message="Role není vyplněna.")
 	 */
 	private $role = 'user';
 

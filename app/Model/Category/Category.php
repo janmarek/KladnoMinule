@@ -14,13 +14,13 @@ class Category extends \Neuron\Model\BaseEntity
 {
 	/**
 	 * @Column
-	 * @validation:NotBlank
+	 * @validation:NotBlank(message="Jméno není vyplněné.")
 	 */
 	private $name;
 
 	/**
 	 * @Column(unique=true)
-	 * @validation:NotBlank
+	 * @validation:NotBlank(message="URL není vyplněná.")
 	 */
 	private $url;
 
