@@ -25,9 +25,9 @@ class PageTest extends \Neuron\Testing\TestCase
 
 	public function testSetTags()
 	{
-		$tag1 = $this->getMock('KladnoMinule\Model\Tag\Tag');
-		$tag2 = $this->getMock('KladnoMinule\Model\Tag\Tag');
-		$tag3 = $this->getMock('KladnoMinule\Model\Tag\Tag');
+		$tag1 = $this->getMock('Neuron\Model\Tag\Tag');
+		$tag2 = $this->getMock('Neuron\Model\Tag\Tag');
+		$tag3 = $this->getMock('Neuron\Model\Tag\Tag');
 
 		$tag1->expects($this->once())->method('increase');
 		$tag1->expects($this->once())->method('decrease');

@@ -19,10 +19,6 @@ UserService:
   class: KladnoMinule\Model\User\Service
   arguments: [%Doctrine\ORM\EntityManager]
 
-TagService:
-  class: KladnoMinule\Model\Tag\Service
-  arguments: [%Doctrine\ORM\EntityManager]
-
 PageService:
   class: KladnoMinule\Model\Page\Service
   arguments: [%Doctrine\ORM\EntityManager, %CategoryService, %UserService, %TagService]

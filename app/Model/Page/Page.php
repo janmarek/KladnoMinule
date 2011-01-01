@@ -40,7 +40,7 @@ class Page extends \Neuron\Model\Page\Page
 	/** @ManyToOne(targetEntity="KladnoMinule\Model\Category\Category") */
 	private $category;
 
-	/** @ManyToMany(targetEntity="KladnoMinule\Model\Tag\Tag") */
+	/** @ManyToMany(targetEntity="Neuron\Model\Tag\Tag") */
 	private $tags;
 
 
