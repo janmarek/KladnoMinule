@@ -76,13 +76,13 @@ class Service extends \Neuron\Model\Service
 			'hash' => $user->getHash(),
 		));
 
+		$em->flush();
+
 		$mail = new Mail;
 		$mail->setHtmlBody($template);
 		$mail->setFrom('no-reply@kladnominule.cz', 'Kladno minulé');
 		$mail->addTo($user->getMail(), $user->getName());
 		$mail->send();
-
-		$em->flush();
 	}
 
 
