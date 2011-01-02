@@ -165,7 +165,7 @@ class Page extends \Neuron\Model\Page\Page
 
 	public function setLat($lat)
 	{
-		$this->lat = $lat;
+		$this->lat = $lat ?: null;
 	}
 
 
@@ -186,7 +186,7 @@ class Page extends \Neuron\Model\Page\Page
 
 	public function getLng()
 	{
-		return $this->lng ?: null;
+		return $this->lng;
 	}
 
 }
