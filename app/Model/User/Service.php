@@ -27,6 +27,17 @@ class Service extends \Neuron\Model\Service
 
 
 
+	protected function setData($entity, $values)
+	{
+		if (empty($values["password"])) {
+			unset($values["password"]);
+		}
+
+		parent::setData($entity, $values);
+	}
+
+
+
 	public function findOneByMail($mail)
 	{
 		return $this->getFinder()->whereMail($mail)->getSingleResult();

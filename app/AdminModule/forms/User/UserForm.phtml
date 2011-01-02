@@ -1,0 +1,29 @@
+{form $form}
+
+<fieldset>
+	<div class="error" n:foreach="$formErrors as $error">{$error}</div>
+
+	<p>
+		{label name}Jméno{/label}<br>
+		{input name}
+	</p>
+	<p>
+		{label mail}E-mail{/label}<br>
+		{input mail}
+	</p>
+	<p>
+		{label role}Role{/label}<br>
+		{input role}
+	</p>
+	<p>
+		{input active} {label active}Aktivní uživatel{/label}
+	</p>
+	<p>
+		{label password}Heslo{/label}<br>
+		{input password} Pozor, heslo je při zadávání viditelné.
+	</p>
+
+	<p>{input s value => "Uložit"}</p>
+</fieldset>
+
+{/form}

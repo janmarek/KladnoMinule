@@ -3,7 +3,7 @@
 namespace KladnoMinule\Presenter\AdminModule;
 
 use Gridito\Grid;
-use Neuron\Form\UserForm;
+use KladnoMinule\Form\UserForm;
 
 class UsersPresenter extends \Neuron\Presenter\AdminModule\AdminPresenter
 {
@@ -39,7 +39,7 @@ class UsersPresenter extends \Neuron\Presenter\AdminModule\AdminPresenter
 	public function actionEdit($id)
 	{
 		$user = $this->service->find($id);
-		$this->template->title = "Upravit uživate $user->name $user->surname";
+		$this->template->title = "Upravit uživate $user->name";
 		$this["form"]->bindEntity($user);
 		$this["form"]->setSuccessFlashMessage("Uživatel byl úspěšně upraven.");
 	}
