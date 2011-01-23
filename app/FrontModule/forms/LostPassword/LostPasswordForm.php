@@ -21,10 +21,14 @@ class LostPasswordForm extends \Neuron\Form\BaseForm
 	{
 		$service = $this->getService('UserService');
 		$user = $service->findOneByMail($values['mail']);
-		$service->sendLostPassword($user);
 
-		$this->presenter->flashMessage('Byl vám poslán e-mail s novým heslem.');
-		$this->presenter->redirect('User:lostPasswordSent');
+		if ($user) {
+			$service->sendLostPassword($user);
+			$this->presenter->flashMessage('Byl vám poslán e-mail s novým heslem.');
+			$this->presenter->redirect('User:lostPasswordSent');
+		} else {
+			$this->addError('Registrovaný uživatel s tímto e-mailem neexistuje.');
+		}
 	}
 
 }

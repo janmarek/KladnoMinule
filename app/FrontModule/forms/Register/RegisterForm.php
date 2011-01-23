@@ -37,7 +37,7 @@ class RegisterForm extends \Neuron\Form\BaseForm
 				'password' => $values['password'],
 			));
 
-			$this->presenter->flashMessage('Registrace byla úspěšná.');
+			$this->presenter->flashMessage('Pro dokončení registrace zkontrolujte svou e-mailovou schránku a následujte pokyny v potvrzovacím e-mailu.');
 			$this->presenter->redirect('Homepage:');
 		} catch (\Nette\Security\AuthenticationException $e) {
 			$this->addError($e->getMessage());

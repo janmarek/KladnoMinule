@@ -11,6 +11,11 @@
 
 {cache $page->cacheKey, tags => $page->cacheKey}{!$page->text|texy}{/cache}
 
+<p class="detail">Datum: {$page->created|date:'j.n.Y'}{if $page->author},
+autor: <a n:href="User:profile $page->author->id">{$page->author->name}</a>{/if}{if $page->category},
+kategorie: <a n:href="Category: $page->category->id">{$page->category->name}</a>{/if}{if count($page->tags) > 0},
+témata: {foreach $page->tags as $tag}{if !$iterator->first}, {/if}<a n:href="Tag: $tag->id">{$tag->name}</a>{/foreach}{/if}</p>
+
 
 {if $page->lat && $page->lng}
 <h2>Mapa</h2>
@@ -30,11 +35,6 @@ marker = new google.maps.Marker({
 });
 </script>
 {/if}
-
-<p class="detail">Datum: {$page->created|date:'j.n.Y'}{if $page->author},
-autor: <a n:href="User:profile $page->author->id">{$page->author->name}</a>{/if}{if $page->category},
-kategorie: <a n:href="Category: $page->category->id">{$page->category->name}</a>{/if}{if count($page->tags) > 0},
-témata: {foreach $page->tags as $tag}{if !$iterator->first}, {/if}<a n:href="Tag: $tag->id">{$tag->name}</a>{/foreach}{/if}</p>
 
 <p><fb:like show_faces="false" font="trebuchet ms" href="{link //this}"></fb:like></p>
 </div>

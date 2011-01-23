@@ -51,6 +51,23 @@ class UserPresenter extends FrontPresenter
 
 
 
+	public function actionConfirmLostPassword($hash)
+	{
+		$user = $this->service->getFinder()->whereHash($hash)->getSingleResult();
+
+		if (!$user) {
+			$this->flashMessage('Uživatel s požadovaným ochranným kódem nebyl nalezen.', 'error');
+			$this->redirect('Homepage:');
+		}
+
+		$this['newPasswordForm']->setDefaults(array(
+			'mail' => $user->getMail(),
+			'hash' => $user->getHash(),
+		));
+	}
+
+
+
 	protected function createComponentArticles($name)
 	{
 		$control = new \KladnoMinule\Control\ArticleList($this, $name);
@@ -87,11 +104,7 @@ class UserPresenter extends FrontPresenter
 
 	protected function createComponentNewPasswordForm($name)
 	{
-		$form = new \KladnoMinule\Form\NewPasswordForm($this, $name);
-		$form->setDefaults(array(
-			'mail' => $this->getParam('mail'),
-			'hash' => $this->getParam('hash'),
-		));
+		new \KladnoMinule\Form\NewPasswordForm($this, $name);
 	}
 
 

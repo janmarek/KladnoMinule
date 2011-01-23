@@ -1,3 +1,8 @@
+.border_radius (@radius: 5px) {
+	-moz-border-radius: @radius;
+	border-radius: @radius @radius @radius @radius;
+}
+
 body {
 	background: #EEE url("../images/stripes-gray.png");
 	font-family: "Trebuchet MS", Arial, sans-serif;
@@ -31,6 +36,8 @@ body {
 .container {
     width: 970px;
 	-webkit-box-shadow: 0 0 15px #BBB;
+	-moz-box-shadow: 0 0 15px #BBB;
+	box-shadow: 0 0 15px #BBB;
 	margin-bottom: 60px;
 }
 
@@ -48,7 +55,7 @@ body {
 
 		background: #FEE9A7 url("../images/box.png") repeat-x;
 		padding: 18px;
-		border-radius: 5px;
+		.border_radius;
 		border: 1px solid #FEE9A7;
 	}
 

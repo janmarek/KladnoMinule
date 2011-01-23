@@ -1,3 +1,8 @@
+.border_radius (@radius: 5px) {
+	-moz-border-radius: @radius;
+	border-radius: @radius @radius @radius @radius;
+}
+
 #text {
 	font-size: 110%;
 	.box {
@@ -70,10 +75,9 @@
 		clear: both;
 	}
 
-	.photo-detail {
-		margin-top: 2em; text-align: center;
-	}
-	.photo-description {margin: 0; text-align: center;}
+	.photo-detail {text-align: center;}
+	.photo-description {text-align: center;}
+	.photo-text-nav {margin: 2em 0 1em; text-align: center; font-size: 90%;}
 
 
 	ul.gallery {
@@ -99,14 +103,14 @@
 		div.comment-texyla {
 			padding: 5px 1em 1em;
 			background: #DEE9FF;
-			border-radius: 5px;
+			.border_radius;
 			margin: 1em 0;
 		}
 
 		.comment {
 			padding: 1em;
 			background: #FBFDFF;
-			border-radius: 5px;
+			.border_radius;
 
 			p.detail {
 				text-align: right;
@@ -128,7 +132,7 @@
 		a, span {
 			background: #FEE9A7 url("../images/box.png") repeat-x;
 			padding: 5px 10px;
-			border-radius: 5px;
+			.border_radius;
 			border: 1px solid #FEE9A7;
 			color: black; text-decoration: none;
 		}

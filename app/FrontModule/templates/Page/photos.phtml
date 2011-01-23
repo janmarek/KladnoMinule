@@ -3,6 +3,14 @@
 <div class="box">
 <h1>{$title} - {$current}/{$total}</h1>
 
+<p class="photo-text-nav">
+	<a n:href="photos id => $page->id, gallery => $gallery->id, photo => $photo->prevPhoto->id" n:if="$photo->prevPhoto">Předchozí</a>
+	|
+	<a n:href="default $page->id">Zpět na článek</a>
+	|
+	<a n:href="photos id => $page->id, gallery => $gallery->id, photo => $photo->nextPhoto->id" n:if="$photo->nextPhoto">Další</a>
+</p>
+
 <p class="photo-detail">
 <a href="{if $photo->nextPhoto}{link photos id => $page->id, gallery => $gallery->id, photo => $photo->nextPhoto->id}{else}{link default $page->id}{/if}">
 	{$photo|imagepath|thumbnail:670:500|imagehtml}
@@ -11,7 +19,7 @@
 
 <p n:if="$photo->description" class="photo-description">{$photo->description}</p>
 
-<p style="margin-top:2em"><fb:like show_faces="false" font="trebuchet ms" href="{link //this}"></fb:like></p>
+<p><fb:like show_faces="false" font="trebuchet ms" href="{link //this}"></fb:like></p>
 
 {if $photo->lat && $photo->lng}
 <h2>Mapa</h2>
@@ -56,10 +64,6 @@ marker = new google.maps.Marker({
 			Další
 		</a>
 	</p>
-
-	<ul>
-		<li><a n:href="default $page->id">Zpět na článek</a></li>
-	</ul>
 </div>
 
 {include #parent}

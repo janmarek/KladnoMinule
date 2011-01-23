@@ -22,7 +22,7 @@ class PageForm extends \Neuron\Form\EntityForm
 		$this->addDatePicker("created");
 		$this->addCheckbox("commentsAllowed");
 		$this->addSelect("author", null, $this->getService('UserService')->getDictionary())->skipFirst('Bez autora');
-		$this->addSelect("category", null, $this->getService('CategoryService')->getDictionary());
+		$this->addSelect("category", null, $this->getService('CategoryService')->getDictionary())->skipFirst('Žádná kategorie');
 		$this->addMultiSelect("tags", null, $this->getService('TagService')->getDictionary(), 10);
 		$this->addHidden("lat");
 		$this->addHidden("lng");

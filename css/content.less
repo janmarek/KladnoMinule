@@ -1,3 +1,8 @@
+.border_radius (@radius: 5px) {
+	-moz-border-radius: @radius;
+	border-radius: @radius @radius @radius @radius;
+}
+
 #content {
 	a:link {color: #3B5998;}
 	a:visited {color: #25385F;}
@@ -9,7 +14,7 @@
 
 	.box.graybox {
 		background: #ECF2FF url("../images/bluebox.png") repeat-x;
-		border-radius: 5px;
+		.border_radius;
 	}
 
 	.box {

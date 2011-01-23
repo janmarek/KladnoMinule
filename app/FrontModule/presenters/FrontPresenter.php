@@ -34,7 +34,7 @@ abstract class FrontPresenter extends \Neuron\Presenter\FrontModule\HomepagePres
 		$feed->cacheOptions = array(
 			'tags' => array('KladnoMinule\Model\Page\Page')
 		);
-		$feed->fileName = 'rss.php';
+		$feed->fileName = 'rss.xml';
 		$feed->folderPath = WWW_DIR;
 		$feed->folderUri = Environment::getVariable('baseUri');
 		$feed->setLinkTitle('Kladno minulé');
